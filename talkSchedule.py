@@ -136,7 +136,7 @@ def crossover(p1, p2, r_cross):
                     teacherIndex += 1
 
             sessionIndex += 1
-    return [p1, c1]
+    return [c1, c2]
 
 def genetic_algorithm():
     # inital population
