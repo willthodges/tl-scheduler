@@ -118,10 +118,12 @@ def crossover(p1, p2, r_cross):
                     p2Index.append(p2Teachers.index(teacher))
             # make lists same length
             length = min(len(p1Unique), len(p2Unique))
+            if length == 0:
+                continue
             p1Unique, p2Unique, p1Index, p2Index = p1Unique[:length], p2Unique[:length], p1Index[:length], p2Index[:length]
 
             # perform crossover
-            pt = randint(len(p1Unique)-1)
+            pt = random.randint(0, len(p1Unique)-1)
             c1Replace = p1Unique[:pt] + p2Unique[pt:]
             c2Replace = p2Unique[:pt] + p1Unique[pt:]
 
@@ -138,17 +140,36 @@ def crossover(p1, p2, r_cross):
             sessionIndex += 1
     return [c1, c2]
 
-def genetic_algorithm():
-    # inital population
-    pop = pop_init(n_pop)
+def genetic_algorithm(n_iter, n_pop, r_cross, r_mut, roomsNum, sessions, teacherTalkMax):
+    # initial population
+    pop = pop_init(n_pop, roomsNum, sessions)
     # keep track of best solution
-    best, best_eval = 0, objective
+    best, best_eval = 0, objective(pop[0], teacherTalkMax)
     # enumerate generations
     for gen in range(n_iter):
-        # evaluate all solutions in the population
+        # evaluate all candidates in the population
         scores = [objective(solution, teacherTalkMax) for solution in pop]
+        # check for new best solution
+        for i in range(n_pop):
+            if scores[i] > best_eval:
+                best, best_eval = pop[i], scores[i]
+                print(f'>{gen}, new best: {scores[i]}')
+        # select parents
         selected = [selection(pop, scores) for _ in range(n_pop)]
-        print(selected)
+        # create the next generation
+        children = []
+        for i in range(0, n_pop, 2):
+            # get selected parents in pairs
+            p1, p2 = selected[i], selected[i+1]
+            # crossover and mutation
+            for c in crossover(p1, p2, r_cross):
+                # mutation
+                # mutation(c, r_mut)
+                # store for next generation
+                children.append(c)
+        # replace population
+        pop = children
+    return [best, best_eval]
 
 # define the total iterations
 n_iter = 100
@@ -157,7 +178,7 @@ n_pop = 100
 # crossover rate
 r_cross = 0.9
 # mutation rate
-# r_mut = 1.0/float(n_bits)
+r_mut = 0.05
 # number of rooms in a session
 roomsNum = 5
 # number of sessions
@@ -165,16 +186,10 @@ sessions = math.ceil(len(talkDict)/roomsNum)
 # target max talks for a teacher
 teacherTalkMax = 18
 
-# # perform the genetic algorithm search
-# best, score = genetic_algorithm(onemax, n_bits, n_iter, n_pop, r_cross, r_mut)
-# print('Done!')
-# print('f(%s) = %f' % (best, score))
-
-
-# popInit = pop_init()
-# score = objective(popInit)
-# # print(popInit)
-# print(f'Score: {score} out of {len(talkDict)*2} ({round((score/(len(talkDict)*2))*100)}%)')
+# perform the genetic algorithm search
+best, score = genetic_algorithm(n_iter, n_pop, r_cross, r_mut, roomsNum, sessions, teacherTalkMax)
+print('Done!')
+print(score)
 
 # third teacher unique subject
 # primary faculty 
