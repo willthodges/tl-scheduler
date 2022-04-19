@@ -85,7 +85,7 @@ def selection(pop, scores, k=3):
     for i in randint(0, len(pop), k-1):
         if scores[i] > scores[selectionIndex]:
             selectionIndex = i
-        return pop[selectionIndex]
+    return pop[selectionIndex]
 
 # crossover two parents to create two children
 def crossover(p1, p2, r_cross):
