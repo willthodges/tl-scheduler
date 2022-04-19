@@ -81,11 +81,11 @@ def objective(pop, teacherTalkMax):
 
 def selection(pop, scores, k=3):
 	# choose the highest score of k selections
-    selection_ix = randint(len(pop))
-    for ix in randint(0, len(pop), k-1):
-        if scores[ix] > scores[selection_ix]:
-            selection_ix = ix
-        return pop[selection_ix]
+    selectionIndex = randint(len(pop))
+    for i in randint(0, len(pop), k-1):
+        if scores[i] > scores[selectionIndex]:
+            selectionIndex = i
+        return pop[selectionIndex]
 
 # crossover two parents to create two children
 def crossover(p1, p2, r_cross):
@@ -140,6 +140,14 @@ def crossover(p1, p2, r_cross):
             sessionIndex += 1
     return [c1, c2]
 
+def mutation(solution, r_mut):
+    for i in range(len(talkDict)):
+        if random.random() < r_mut:
+            t1 = solution[math.ceil((i+1)/5)-1][i-math.floor(i/5)*5][0]
+            j = random.randint(0, len(talkDict)-1)
+            t2 = solution[math.ceil((j+1)/5)-1][j-math.floor(j/5)*5][0]
+            solution[math.ceil((i+1)/5)-1][i-math.floor(i/5)*5][0], solution[math.ceil((j+1)/5)-1][j-math.floor(j/5)*5][0] = t2, t1
+
 def genetic_algorithm(n_iter, n_pop, r_cross, r_mut, roomsNum, sessions, teacherTalkMax):
     # initial population
     pop = pop_init(n_pop, roomsNum, sessions)
@@ -162,11 +170,11 @@ def genetic_algorithm(n_iter, n_pop, r_cross, r_mut, roomsNum, sessions, teacher
             # get selected parents in pairs
             p1, p2 = selected[i], selected[i+1]
             # crossover and mutation
-            for c in crossover(p1, p2, r_cross):
+            for solution in crossover(p1, p2, r_cross):
                 # mutation
-                # mutation(c, r_mut)
+                mutation(solution, r_mut)
                 # store for next generation
-                children.append(c)
+                children.append(solution)
         # replace population
         pop = children
     return [best, best_eval]
@@ -178,7 +186,7 @@ n_pop = 100
 # crossover rate
 r_cross = 0.9
 # mutation rate
-r_mut = 0.05
+r_mut = 1/len(talkDict)
 # number of rooms in a session
 roomsNum = 5
 # number of sessions
