@@ -127,7 +127,6 @@ def crossover(p1, p2, r_cross):
             c1Replace = p1Unique[:pt] + p2Unique[pt:]
             c2Replace = p2Unique[:pt] + p1Unique[pt:]
 
-            # 🍝
             teacherIndex = 0
             for i in range(len(p1[sessionIndex])):
                 for j in range(1, len(p1[sessionIndex][i])):
@@ -140,6 +139,7 @@ def crossover(p1, p2, r_cross):
             sessionIndex += 1
     return [c1, c2]
 
+# 🍝
 def mutation(solution, r_mut):
     for i in range(len(talkDict)):
         if random.random() < r_mut:
@@ -147,6 +147,13 @@ def mutation(solution, r_mut):
             j = random.randint(0, len(talkDict)-1)
             t2 = solution[math.ceil((j+1)/5)-1][j-math.floor(j/5)*5][0]
             solution[math.ceil((i+1)/5)-1][i-math.floor(i/5)*5][0], solution[math.ceil((j+1)/5)-1][j-math.floor(j/5)*5][0] = t2, t1
+
+    for i in range(len(talkDict)*3):
+        if random.random() < r_mut:
+            t1 = solution[math.ceil((i+1)/15)-1][math.floor(i/3)-math.floor(i/15)*5][i-math.floor(i/3)*3+1]
+            j = random.randint(0, len(talkDict)*3-1)
+            t2 = solution[math.ceil((j+1)/15)-1][math.floor(j/3)-math.floor(j/15)*5][i-math.floor(j/3)*3+1]
+            solution[math.ceil((i+1)/15)-1][math.floor(i/3)-math.floor(i/15)*5][i-math.floor(i/3)*3+1], solution[math.ceil((j+1)/15)-1][math.floor(j/3)-math.floor(j/15)*5][i-math.floor(j/3)*3+1] = t2, t1
 
 def genetic_algorithm(n_iter, n_pop, r_cross, r_mut, roomsNum, sessions, teacherTalkMax):
     # initial population
@@ -195,10 +202,11 @@ sessions = math.ceil(len(talkDict)/roomsNum)
 teacherTalkMax = 18
 
 # perform the genetic algorithm search
-best, score = genetic_algorithm(n_iter, n_pop, r_cross, r_mut, roomsNum, sessions, teacherTalkMax)
-print('Done!')
-print(score)
+# best, score = genetic_algorithm(n_iter, n_pop, r_cross, r_mut, roomsNum, sessions, teacherTalkMax)
+# print('Done!')
+# print(score)
 
+mutation(pop_init(n_pop, roomsNum, sessions)[0], r_mut)
 # third teacher unique subject
 # primary faculty 
 # teacher max? switch to subject teacher?
