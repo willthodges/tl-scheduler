@@ -139,7 +139,7 @@ def crossover(p1, p2, r_cross):
             sessionIndex += 1
     return [c1, c2]
 
-# 🍝
+# 🍝😭
 def mutation(solution, r_mut):
     for i in range(len(talkDict)):
         if random.random() < r_mut:
@@ -152,8 +152,8 @@ def mutation(solution, r_mut):
         if random.random() < r_mut:
             t1 = solution[math.ceil((i+1)/15)-1][math.floor(i/3)-math.floor(i/15)*5][i-math.floor(i/3)*3+1]
             j = random.randint(0, len(talkDict)*3-1)
-            t2 = solution[math.ceil((j+1)/15)-1][math.floor(j/3)-math.floor(j/15)*5][i-math.floor(j/3)*3+1]
-            solution[math.ceil((i+1)/15)-1][math.floor(i/3)-math.floor(i/15)*5][i-math.floor(i/3)*3+1], solution[math.ceil((j+1)/15)-1][math.floor(j/3)-math.floor(j/15)*5][i-math.floor(j/3)*3+1] = t2, t1
+            t2 = solution[math.ceil((j+1)/15)-1][math.floor(j/3)-math.floor(j/15)*5][j-math.floor(j/3)*3+1]
+            solution[math.ceil((i+1)/15)-1][math.floor(i/3)-math.floor(i/15)*5][i-math.floor(i/3)*3+1], solution[math.ceil((j+1)/15)-1][math.floor(j/3)-math.floor(j/15)*5][j-math.floor(j/3)*3+1] = t2, t1
 
 def genetic_algorithm(n_iter, n_pop, r_cross, r_mut, roomsNum, sessions, teacherTalkMax):
     # initial population
@@ -164,6 +164,7 @@ def genetic_algorithm(n_iter, n_pop, r_cross, r_mut, roomsNum, sessions, teacher
     for gen in range(n_iter):
         # evaluate all candidates in the population
         scores = [objective(solution, teacherTalkMax) for solution in pop]
+        print(scores)
         # check for new best solution
         for i in range(n_pop):
             if scores[i] > best_eval:
@@ -193,7 +194,7 @@ n_pop = 100
 # crossover rate
 r_cross = 0.9
 # mutation rate
-r_mut = 1/len(talkDict)
+r_mut = 0.05
 # number of rooms in a session
 roomsNum = 5
 # number of sessions
@@ -202,11 +203,10 @@ sessions = math.ceil(len(talkDict)/roomsNum)
 teacherTalkMax = 18
 
 # perform the genetic algorithm search
-# best, score = genetic_algorithm(n_iter, n_pop, r_cross, r_mut, roomsNum, sessions, teacherTalkMax)
-# print('Done!')
-# print(score)
+best, score = genetic_algorithm(n_iter, n_pop, r_cross, r_mut, roomsNum, sessions, teacherTalkMax)
+print('Done')
+print(score)
 
-mutation(pop_init(n_pop, roomsNum, sessions)[0], r_mut)
 # third teacher unique subject
 # primary faculty 
 # teacher max? switch to subject teacher?
