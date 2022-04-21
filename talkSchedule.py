@@ -85,9 +85,9 @@ def crossover(p1, p2, r_cross, rooms):
     # check for recombination
     if random.random() < r_cross:
         # talk crossover
-        pt = randint(1, len(p1[0])-2)
-        c1[0] = p1[0][:pt] + p2[0][pt:]
-        c2[0] = p2[0][:pt] + p1[0][pt:]
+        # pt = randint(1, len(p1[0])-2)
+        # c1[0] = p1[0][:pt] + p2[0][pt:]
+        # c2[0] = p2[0][:pt] + p1[0][pt:]
         # panel crossover
         pt = randint(1, len(p1[1])-2)
         c1[1] = p1[1][:pt] + p2[1][pt:]
@@ -132,10 +132,11 @@ def genetic_algorithm(n_iter, n_pop, r_cross, r_talkMut, r_panelMut, rooms, sess
     best, bestScore = 0, fitness(talkPop[0], panelPop[0], teacherTalkMax)
     # enumerate generations
     for gen in range(n_iter):
-        if gen % 1000 == 0:
+        if gen+1 % 1000 == 0:
             print(f'>{gen}')
         # evaluate all candidates in the population
         scores = [fitness(talkSolution, panelSolution, teacherTalkMax) for talkSolution, panelSolution in zip(talkPop, panelPop)]
+        print(scores)
         # check for new best solution
         for i in range(n_pop):
             if scores[i] > bestScore:
@@ -169,7 +170,7 @@ n_pop = 100
 # crossover rate
 r_cross = 0.9
 # talk mutation rate
-r_talkMut = 1/100
+r_talkMut = 0.01
 # panel mutation rate
 r_panelMut = 1/300
 # number of rooms in a session
