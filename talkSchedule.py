@@ -155,11 +155,7 @@ def mutation(solution, r_mut):
             t2 = solution[math.ceil((j+1)/15)-1][math.floor(j/3)-math.floor(j/15)*5][j-math.floor(j/3)*3+1]
             solution[math.ceil((i+1)/15)-1][math.floor(i/3)-math.floor(i/15)*5][i-math.floor(i/3)*3+1], solution[math.ceil((j+1)/15)-1][math.floor(j/3)-math.floor(j/15)*5][j-math.floor(j/3)*3+1] = t2, t1
 
-<<<<<<< HEAD
 def genetic_algorithm(n_iter, n_pop, r_cross, r_mut, rooms, sessions, teacherTalkMax):
-=======
-def genetic_algorithm(n_iter, n_pop, r_cross, r_mut, roomsNum, sessions, teacherTalkMax):
->>>>>>> 301ed589cdb7f6fa8ab07b9251ebbd12c5987542
     # initial population
     pop = pop_init(n_pop, rooms, sessions)
     # keep track of best solution
@@ -207,15 +203,9 @@ sessions = math.ceil(len(talkDict)/rooms)
 teacherTalkMax = 18
 
 # perform the genetic algorithm search
-<<<<<<< HEAD
 # best, score = genetic_algorithm(n_iter, n_pop, r_cross, r_mut, rooms, sessions, teacherTalkMax)
 # print('Done')
 # print(score)
-=======
-best, score = genetic_algorithm(n_iter, n_pop, r_cross, r_mut, roomsNum, sessions, teacherTalkMax)
-print('Done')
-print(score)
->>>>>>> 301ed589cdb7f6fa8ab07b9251ebbd12c5987542
 
 # third teacher unique subject
 # primary faculty 
