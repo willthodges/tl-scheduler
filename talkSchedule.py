@@ -17,44 +17,44 @@ with open('talks.csv', 'r', newline='') as in_file:
         (talk, advisor, primaryFaculty, subject) = row
         talkDict[int(talk)] = (advisor, primaryFaculty, subject)
 
-def pop_init(n_pop, roomsNum, sessions):
-    pop = []
-    for i in range(n_pop):
-        solution = []
+def pop_init(n_pop, rooms, sessions):
+    talkPop = []
+    panelPop = []
+    leftover = rooms-(rooms*sessions-len(talkDict))
+    if leftover == 0:
+        leftover = rooms
+    for _ in range(n_pop):
         # create random sample of talks
-        talkRandom = random.sample([talk for talk in talkDict], len(talkDict))
+        talkSolution = random.sample([talk for talk in talkDict], len(talkDict))
+        panelSolution = []
         for i in range(sessions):
-            if len(talkRandom) >= roomsNum:
-            # create list of three teachers per panel
-                sessionNew = random.sample((sorted(teacherSubject)), roomsNum*3)
-            # if there are less talks than rooms, only assign teachers to remaining talks
+            if i != sessions-1:
+                # sample a random session
+                sessionNew = random.sample((sorted(teacherSubject)), rooms*3)
             else:
-                sessionNew = random.sample((sorted(teacherSubject)), len(talkRandom)*3)
-            # split list into sublists containing three teachers
-            sessionNew = [sessionNew[i:i+3] for i in range(0, len(sessionNew), 3)]
-
-            # for every panel choose a random talk to append
-            for panel in sessionNew:
-                talk = random.choice(talkRandom)
-                panel.insert(0, talk)
-                talkRandom.remove(talk)
+                sessionNew = random.sample((sorted(teacherSubject)), leftover*3)
             # append each session to the solution
-            solution.append(sessionNew)
+            panelSolution.extend(sessionNew)
         # append each solution to the population
-        pop.append(solution)
-    return pop
+        talkPop.append(talkSolution)
+        panelPop.append(panelSolution)
+    return [talkPop, panelPop]
 
-def objective(pop, teacherTalkMax):
+def objective(talkPop, panelPop, teacherTalkMax):
     score = 0
+
     teacherTalks = {}
     for teacher in teacherSubject.keys():
         teacherTalks[teacher] = 0
-    for session in pop:
-        for talk in session:
-            for teacher in talk[1:]:
-                teacherTalks[teacher] += 1
-                if teacherTalks[teacher] > teacherTalkMax:
-                    score -= 1 # too many talks
+    for teacher in panelPop:
+        teacherTalks[teacher] += 1
+        if teacherTalks[teacher] > teacherTalkMax:
+            score -= 1 # too many talks
+
+    for teacher in panelPop:
+        advisor = talkDict[talkPop[math.floor(panelPop.index(teacher)/3)]][0]
+        primaryFaculty = talkDict[talkPop[math.floor(panelPop.index(teacher)/3)]][1]
+        subject = talkDict[talkPop[math.floor(panelPop.index(teacher)/3)]][2]
 
     for session in pop:
         for talk in session:
@@ -75,7 +75,7 @@ def objective(pop, teacherTalkMax):
                     if teacherSubject[teacher] == subject:
                         # only count one subject teacher
                         if subjectTeacher == False:
-                            score += 1 # subject teacher in talk
+                            score += 0.5 # subject teacher in talk
                             subjectTeacher = True
     return score
 
@@ -139,7 +139,7 @@ def crossover(p1, p2, r_cross):
             sessionIndex += 1
     return [c1, c2]
 
-# 🍝
+# 🍝😭
 def mutation(solution, r_mut):
     for i in range(len(talkDict)):
         if random.random() < r_mut:
@@ -152,18 +152,19 @@ def mutation(solution, r_mut):
         if random.random() < r_mut:
             t1 = solution[math.ceil((i+1)/15)-1][math.floor(i/3)-math.floor(i/15)*5][i-math.floor(i/3)*3+1]
             j = random.randint(0, len(talkDict)*3-1)
-            t2 = solution[math.ceil((j+1)/15)-1][math.floor(j/3)-math.floor(j/15)*5][i-math.floor(j/3)*3+1]
-            solution[math.ceil((i+1)/15)-1][math.floor(i/3)-math.floor(i/15)*5][i-math.floor(i/3)*3+1], solution[math.ceil((j+1)/15)-1][math.floor(j/3)-math.floor(j/15)*5][i-math.floor(j/3)*3+1] = t2, t1
+            t2 = solution[math.ceil((j+1)/15)-1][math.floor(j/3)-math.floor(j/15)*5][j-math.floor(j/3)*3+1]
+            solution[math.ceil((i+1)/15)-1][math.floor(i/3)-math.floor(i/15)*5][i-math.floor(i/3)*3+1], solution[math.ceil((j+1)/15)-1][math.floor(j/3)-math.floor(j/15)*5][j-math.floor(j/3)*3+1] = t2, t1
 
-def genetic_algorithm(n_iter, n_pop, r_cross, r_mut, roomsNum, sessions, teacherTalkMax):
+def genetic_algorithm(n_iter, n_pop, r_cross, r_mut, rooms, sessions, teacherTalkMax):
     # initial population
-    pop = pop_init(n_pop, roomsNum, sessions)
+    pop = pop_init(n_pop, rooms, sessions)
     # keep track of best solution
     best, best_eval = 0, objective(pop[0], teacherTalkMax)
     # enumerate generations
     for gen in range(n_iter):
         # evaluate all candidates in the population
         scores = [objective(solution, teacherTalkMax) for solution in pop]
+        print(scores)
         # check for new best solution
         for i in range(n_pop):
             if scores[i] > best_eval:
@@ -193,20 +194,25 @@ n_pop = 100
 # crossover rate
 r_cross = 0.9
 # mutation rate
-r_mut = 1/len(talkDict)
+r_mut = 0.05
 # number of rooms in a session
-roomsNum = 5
+rooms = 5
 # number of sessions
-sessions = math.ceil(len(talkDict)/roomsNum)
+sessions = math.ceil(len(talkDict)/rooms)
 # target max talks for a teacher
 teacherTalkMax = 18
 
 # perform the genetic algorithm search
-# best, score = genetic_algorithm(n_iter, n_pop, r_cross, r_mut, roomsNum, sessions, teacherTalkMax)
-# print('Done!')
+# best, score = genetic_algorithm(n_iter, n_pop, r_cross, r_mut, rooms, sessions, teacherTalkMax)
+# print('Done')
 # print(score)
 
-mutation(pop_init(n_pop, roomsNum, sessions)[0], r_mut)
 # third teacher unique subject
 # primary faculty 
 # teacher max? switch to subject teacher?
+
+# TO DO
+# make talks and teachers seperate lists
+# recombine entire talk and teacher list
+# if teacher appears twice in groups of 15, switch for a random unique teacher
+# mutate both lists the same way
