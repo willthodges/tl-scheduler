@@ -149,7 +149,6 @@ def genetic_algorithm(n_iter, n_pop, r_cross, r_talkMut, r_panelMut, k, rooms, s
             print(f'>{gen}')
         # evaluate all candidates in the population
         scores = [fitness(talkSolution, panelSolution, teacherTalkMax) for talkSolution, panelSolution in zip(talkPop, panelPop)]
-        # print(scores)
         # check for new best solution
         for i in range(n_pop):
             if scores[i] > bestScore:
