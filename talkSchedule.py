@@ -66,11 +66,12 @@ def fitness(talkSolution, panelSolution, teacherTalkMax):
                 if teacherSubject[teacher] == subject:
                     # only count one subject teacher
                     if subjectTeacher == False:
-                        score += 0.5 # subject teacher in talk
+                        score += 1 # subject teacher in talk
                         subjectTeacher = True
+    score = round(score/(len(talkDict)*2), 3)
     return score
 
-def selection(talkPop, panelPop, scores, k=3):
+def selection(talkPop, panelPop, scores, k):
 	# choose the highest score of k selections
     selection_i = randint(len(talkPop))
     for i in randint(0, len(talkPop), k-1):
@@ -85,13 +86,25 @@ def crossover(p1, p2, r_cross, rooms):
     # check for recombination
     if random.random() < r_cross:
         # talk crossover
-        # pt = randint(1, len(p1[0])-2)
-        # c1[0] = p1[0][:pt] + p2[0][pt:]
-        # c2[0] = p2[0][:pt] + p1[0][pt:]
+        pt = randint(1, len(p1[0])-2)
+        c1[0] = p1[0][:pt] + p2[0][pt:]
+        c2[0] = p2[0][:pt] + p1[0][pt:]
+        # swap talks that appear more than once
+        for talk_i in range(len(c1[0])):
+            if c1[0].count(c1[0][talk_i]) > 1:
+                avaliable = list(set(sorted(talkDict)).symmetric_difference(set(c1[0])))
+                c1[0][talk_i] = random.choice(avaliable)
+        for talk_i in range(len(c2[0])):
+            if c2[0].count(c2[0][talk_i]) > 1:
+                avaliable = list(set(sorted(talkDict)).symmetric_difference(set(c2[0])))
+                c2[0][talk_i] = random.choice(avaliable)
+
         # panel crossover
         pt = randint(1, len(p1[1])-2)
         c1[1] = p1[1][:pt] + p2[1][pt:]
         c2[1] = p2[1][:pt] + p1[1][pt:]
+        # c1[1] = p1[1][:pt*3] + p2[1][pt*3:]
+        # c2[1] = p2[1][:pt*3] + p1[1][pt*3:]
         # swap teachers that appear more than once in a session
         sessionList = [c1[1][i:i+rooms*3] for i in range(0, len(c1[1]), rooms*3)]
         for session_i in range(len(sessionList)):
@@ -125,7 +138,7 @@ def mutation(talkSolution, panelSolution, r_talkMut, r_panelMut, rooms):
                 avaliable = list(set(sorted(teacherSubject)).symmetric_difference(set(sessionList[session_i])))
                 panelSolution[session_i*rooms*3 + teacher_i] = random.choice(avaliable)
 
-def genetic_algorithm(n_iter, n_pop, r_cross, r_talkMut, r_panelMut, rooms, sessions, teacherTalkMax, scoreMax):
+def genetic_algorithm(n_iter, n_pop, r_cross, r_talkMut, r_panelMut, k, rooms, sessions, teacherTalkMax):
     # initial population
     talkPop, panelPop = pop_init(n_pop, rooms, sessions)
     # keep track of best solution
@@ -136,17 +149,14 @@ def genetic_algorithm(n_iter, n_pop, r_cross, r_talkMut, r_panelMut, rooms, sess
             print(f'>{gen}')
         # evaluate all candidates in the population
         scores = [fitness(talkSolution, panelSolution, teacherTalkMax) for talkSolution, panelSolution in zip(talkPop, panelPop)]
-        print(scores)
+        # print(scores)
         # check for new best solution
         for i in range(n_pop):
             if scores[i] > bestScore:
-                best, bestScore = (talkPop[i], panelPop[i]), scores[i]
+                best, bestScore = [talkPop[i], panelPop[i]], scores[i]
                 print(f'>{gen}, new best: {scores[i]}')
-        if bestScore == scoreMax:
-            print('Perfect Score!')
-            break
         # select parents
-        selected = [selection(talkPop, panelPop, scores) for _ in range(n_pop)]
+        selected = [selection(talkPop, panelPop, scores, k) for _ in range(n_pop)]
         # create the next generation
         talkChildren, panelChildren = [], []
         for i in range(0, n_pop, 2):
@@ -161,29 +171,33 @@ def genetic_algorithm(n_iter, n_pop, r_cross, r_talkMut, r_panelMut, rooms, sess
                 panelChildren.append(panelSolution)
         # replace population
         talkPop, panelPop = talkChildren, panelChildren
+    panelList = [best[1][i:i+3] for i in range(0, len(best[1]), 3)]
+    for i in range(len(panelList)):
+        panelList[i].insert(0, best[0][i])
+    best = panelList
     return [best, bestScore]
 
 # define the total iterations
-n_iter = 5000
+n_iter = 500
 # define the population size
-n_pop = 100
+n_pop = 1000
 # crossover rate
 r_cross = 0.9
 # talk mutation rate
-r_talkMut = 0.01
+r_talkMut = 1/100
 # panel mutation rate
 r_panelMut = 1/300
+# candidates drawn in selection
+k = 30
 # number of rooms in a session
 rooms = 5
 # number of sessions
 sessions = math.ceil(len(talkDict)/rooms)
 # target max talks for a teacher
 teacherTalkMax = 18
-# max score
-scoreMax = 198
 
 # perform the genetic algorithm search
-best, score = genetic_algorithm(n_iter, n_pop, r_cross, r_talkMut, r_panelMut, rooms, sessions, teacherTalkMax, scoreMax)
+best, score = genetic_algorithm(n_iter, n_pop, r_cross, r_talkMut, r_panelMut, k, rooms, sessions, teacherTalkMax)
 print('Done')
 print(best)
 
