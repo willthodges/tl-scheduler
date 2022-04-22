@@ -15,7 +15,7 @@ with open('talks.csv', 'r', newline='') as in_file:
     next(reader)
     for row in reader:
         (talk, advisor, primaryFaculty, subject) = row
-        talkDict[int(talk)] = (advisor, primaryFaculty, subject)
+        talkDict[talk] = (advisor, primaryFaculty, subject)
 
 def pop_init(n_pop, rooms, sessions):
     talkPop = []
@@ -68,7 +68,7 @@ def fitness(talkSolution, panelSolution, teacherTalkMax):
                     if subjectTeacher == False:
                         score += 1 # subject teacher in talk
                         subjectTeacher = True
-    score = round(score/(len(talkDict)*3), 3)
+    score = score/(len(talkDict)*3)
     return score
 
 def selection(talkPop, panelPop, scores, k):
@@ -98,7 +98,6 @@ def crossover(p1, p2, r_cross, rooms):
             if c2[0].count(c2[0][talk_i]) > 1:
                 avaliable = list(set(sorted(talkDict)).symmetric_difference(set(c2[0])))
                 c2[0][talk_i] = random.choice(avaliable)
-
         # panel crossover
         pt = randint(1, len(p1[1])-2)
         c1[1] = p1[1][:pt] + p2[1][pt:]
@@ -153,7 +152,7 @@ def genetic_algorithm(n_iter, n_pop, r_cross, r_talkMut, r_panelMut, k, rooms, s
         for i in range(n_pop):
             if scores[i] > bestScore:
                 best, bestScore = [talkPop[i], panelPop[i]], scores[i]
-                print(f'>{gen}, new best: {scores[i]}')
+                print(f'>{gen}, new best: {round(scores[i], 3)}')
         # select parents
         selected = [selection(talkPop, panelPop, scores, k) for _ in range(n_pop)]
         # create the next generation
@@ -170,14 +169,10 @@ def genetic_algorithm(n_iter, n_pop, r_cross, r_talkMut, r_panelMut, k, rooms, s
                 panelChildren.append(panelSolution)
         # replace population
         talkPop, panelPop = talkChildren, panelChildren
-    panelList = [best[1][i:i+3] for i in range(0, len(best[1]), 3)]
-    for i in range(len(panelList)):
-        panelList[i].insert(0, best[0][i])
-    best = panelList
     return [best, bestScore]
 
 # define the total iterations
-n_iter = 10000
+n_iter = 50000
 # define the population size (average solution length * 5)
 n_pop = 1000
 # crossover rate
@@ -198,7 +193,28 @@ teacherTalkMax = 15
 # perform the genetic algorithm search
 best, score = genetic_algorithm(n_iter, n_pop, r_cross, r_talkMut, r_panelMut, k, rooms, sessions, teacherTalkMax)
 print('Done')
-print(best)
+
+# out file
+with open('talk_schedule.csv', 'r', newline='') as in_file:
+    reader = csv.reader(in_file)
+    previousScore = float(next(reader)[1])
+    if score > previousScore:
+        print(f'New best solution! (New: {score}, Old: {previousScore})')
+        with open('talk_schedule.csv', 'w', newline='') as out_file:
+            panelList = [best[1][i:i+3] for i in range(0, len(best[1]), 3)]
+            for i in range(len(panelList)):
+                panelList[i].insert(0, best[0][i])
+            sessionList = [panelList[i:i+rooms] for i in range(0, len(panelList), rooms)]
+            writer = csv.writer(out_file)
+            writer.writerow(['score', score])
+            # headers
+            writer.writerow(['Session', 'Room 1', 'Room 2', 'Room 3', 'Room 4', 'Room 5'])
+            for i in range(sessions):
+                dataline = [i+1]
+                for panel in sessionList[i]:
+                    dataline.append('\n'.join(panel))
+                writer.writerow(dataline)
+            
 
 # third teacher unique subject
 # primary faculty
