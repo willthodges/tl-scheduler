@@ -18,9 +18,8 @@ with open('talks.csv', 'r', newline='') as in_file:
         talkDict[talk] = (advisor, primaryFaculty, subject)
 
 def pop_init(n_pop, rooms, sessions):
-    talkPop = []
-    panelPop = []
-    leftover = rooms-(rooms*sessions-len(talkDict))
+    talkPop, panelPop = [], []
+    leftover = rooms - (rooms*sessions - len(talkDict))
     if leftover == 0:
         leftover = rooms
     for _ in range(n_pop):
@@ -56,19 +55,23 @@ def fitness(talkSolution, panelSolution, teacherTalkMax):
         subject = talkDict[talkSolution[panel_i]][2]
         subjectTeacher = False
         for teacher in panelList[panel_i]:
-            if teacher == advisor:
-                score += 2 # advisor in talk
             if teacherTalks[primaryFaculty] <= teacherTalkMax:
+                if teacher == advisor:
+                    score += 1 # advisor in talk
                 if teacher == primaryFaculty:
                     score += 1 # primary faculty in talk
             else:
                 # if primary faculty has too many talks, count score for subject teacher instead
                 if teacherSubject[teacher] == subject:
+                    if teacher == advisor:
+                        score += 1 # advisor in talk
+                        # if advisor is subject teacher only count one
+                        continue
                     # only count one subject teacher
                     if subjectTeacher == False:
-                        score += 1 # subject teacher in talk
+                        score += 0.5 # subject teacher in talk
                         subjectTeacher = True
-    score = score/(len(talkDict)*3)
+    score = score/(len(talkDict)*2)
     return score
 
 def selection(talkPop, panelPop, scores, k):
@@ -188,7 +191,7 @@ rooms = 5
 # number of sessions
 sessions = math.ceil(len(talkDict)/rooms)
 # target max talks for a teacher
-teacherTalkMax = 15
+teacherTalkMax = 10
 
 # perform the genetic algorithm search
 best, score = genetic_algorithm(n_iter, n_pop, r_cross, r_talkMut, r_panelMut, k, rooms, sessions, teacherTalkMax)
@@ -217,5 +220,6 @@ with open('talk_schedule.csv', 'r', newline='') as in_file:
             
 
 # third teacher unique subject
-# primary faculty
+# primary faculty prefer
 # teacher max? switch to subject teacher?
+# if advisor is also subject teacher count it?
