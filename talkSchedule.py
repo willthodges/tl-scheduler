@@ -140,11 +140,35 @@ def mutation(talkSolution, panelSolution, r_talkMut, r_panelMut, rooms):
                 avaliable = list(set(sorted(teacherSubject)).symmetric_difference(set(sessionList[session_i])))
                 panelSolution[session_i*rooms*3 + teacher_i] = random.choice(avaliable)
 
+def out_file(talkSolution, panelSolution, score, rooms, sessions):
+    with open('talk_schedule.csv', 'w', newline='') as out_file:
+        panelList = [panelSolution[i:i+3] for i in range(0, len(panelSolution), 3)]
+        for i in range(len(panelList)):
+            panelList[i].insert(0, talkSolution[i])
+        sessionList = [panelList[i:i+rooms] for i in range(0, len(panelList), rooms)]
+        writer = csv.writer(out_file)
+        writer.writerow(['score', score])
+        # headers
+        writer.writerow(['Session', 'Room 1', 'Room 2', 'Room 3', 'Room 4', 'Room 5'])
+        for i in range(sessions):
+            dataline = [i+1]
+            for panel in sessionList[i]:
+                dataline.append('\n'.join(panel))
+            writer.writerow(dataline)
+
 def genetic_algorithm(n_iter, n_pop, r_cross, r_talkMut, r_panelMut, k, rooms, sessions, teacherTalkMax):
     # initial population
     talkPop, panelPop = pop_init(n_pop, rooms, sessions)
     # keep track of best solution
-    best, bestScore = 0, fitness(talkPop[0], panelPop[0], teacherTalkMax)
+    talkBest, panelBest, bestScore = 0, 0, fitness(talkPop[0], panelPop[0], teacherTalkMax)
+    # keep track of overall best score
+    with open('talk_schedule.csv', 'r', newline='') as in_file:
+        reader = csv.reader(in_file)
+        readerList = list(reader)
+        if len(readerList) == 0:
+            overallBestScore = 0
+        else:
+            overallBestScore = float(readerList[0][1])
     # enumerate generations
     for gen in range(n_iter):
         if gen % 1000 == 0:
@@ -154,8 +178,12 @@ def genetic_algorithm(n_iter, n_pop, r_cross, r_talkMut, r_panelMut, k, rooms, s
         # check for new best solution
         for i in range(n_pop):
             if scores[i] > bestScore:
-                best, bestScore = [talkPop[i], panelPop[i]], scores[i]
-                print(f'>{gen}, new best: {round(scores[i], 3)}')
+                talkBest, panelBest, bestScore = talkPop[i], panelPop[i], scores[i]
+                print(f'>{gen}, new best: {round(bestScore, 3)}')
+                # write best solution to file
+                if bestScore > overallBestScore:
+                    overallBestScore = bestScore
+                    out_file(talkBest, panelBest, overallBestScore, rooms, sessions)
         # select parents
         selected = [selection(talkPop, panelPop, scores, k) for _ in range(n_pop)]
         # create the next generation
@@ -172,10 +200,10 @@ def genetic_algorithm(n_iter, n_pop, r_cross, r_talkMut, r_panelMut, k, rooms, s
                 panelChildren.append(panelSolution)
         # replace population
         talkPop, panelPop = talkChildren, panelChildren
-    return [best, bestScore]
+    print('Done')
 
 # define the total iterations
-n_iter = 50000
+n_iter = 100000
 # define the population size (average solution length * 5)
 n_pop = 1000
 # crossover rate
@@ -190,36 +218,16 @@ k = 30
 rooms = 5
 # number of sessions
 sessions = math.ceil(len(talkDict)/rooms)
-# target max talks for a teacher
-teacherTalkMax = 10
+# target max talks for a teacher (min talks*3 / teachers)
+teacherTalkMax = 15
 
 # perform the genetic algorithm search
-best, score = genetic_algorithm(n_iter, n_pop, r_cross, r_talkMut, r_panelMut, k, rooms, sessions, teacherTalkMax)
-print('Done')
+genetic_algorithm(n_iter, n_pop, r_cross, r_talkMut, r_panelMut, k, rooms, sessions, teacherTalkMax)
 
-# out file
-with open('talk_schedule.csv', 'r', newline='') as in_file:
-    reader = csv.reader(in_file)
-    previousScore = float(next(reader)[1])
-    if score > previousScore:
-        print(f'New best solution! (New: {score}, Old: {previousScore})')
-        with open('talk_schedule.csv', 'w', newline='') as out_file:
-            panelList = [best[1][i:i+3] for i in range(0, len(best[1]), 3)]
-            for i in range(len(panelList)):
-                panelList[i].insert(0, best[0][i])
-            sessionList = [panelList[i:i+rooms] for i in range(0, len(panelList), rooms)]
-            writer = csv.writer(out_file)
-            writer.writerow(['score', score])
-            # headers
-            writer.writerow(['Session', 'Room 1', 'Room 2', 'Room 3', 'Room 4', 'Room 5'])
-            for i in range(sessions):
-                dataline = [i+1]
-                for panel in sessionList[i]:
-                    dataline.append('\n'.join(panel))
-                writer.writerow(dataline)
-            
 
 # third teacher unique subject
-# primary faculty prefer
 # teacher max? switch to subject teacher?
 # if advisor is also subject teacher count it?
+# the lower the teacher max, the lower the score 
+
+# nice looking solution csv
