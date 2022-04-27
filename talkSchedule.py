@@ -57,14 +57,14 @@ def fitness(talkSolution, panelSolution, teacherTalkMax):
         for teacher in panelList[panel_i]:
             if teacherTalks[primaryFaculty] <= teacherTalkMax:
                 if teacher == advisor:
-                    score += 1 # advisor in talk
+                    score += 2 # advisor in talk
                 if teacher == primaryFaculty:
                     score += 1 # primary faculty in talk
             else:
                 # if primary faculty has too many talks, count score for subject teacher instead
                 if teacherSubject[teacher] == subject:
                     if teacher == advisor:
-                        score += 1 # advisor in talk
+                        score += 2 # advisor in talk
                         # if advisor is subject teacher only count one
                         continue
                     # only count one subject teacher
@@ -231,3 +231,5 @@ genetic_algorithm(n_iter, n_pop, r_cross, r_talkMut, r_panelMut, k, rooms, sessi
 # the lower the teacher max, the lower the score 
 
 # nice looking solution csv
+# advisor > primary faculty > subject teacher
+# above max penalty = advisor?
