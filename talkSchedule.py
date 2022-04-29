@@ -71,7 +71,7 @@ def fitness(talkSolution, panelSolution, teacherTalkMax):
                     if subjectTeacher == False:
                         score += 0.5 # subject teacher in talk
                         subjectTeacher = True
-    score = score/(len(talkDict)*2)
+    score = score/(len(talkDict)*3)
     return score
 
 def selection(talkPop, panelPop, scores, k):
@@ -233,3 +233,5 @@ genetic_algorithm(n_iter, n_pop, r_cross, r_talkMut, r_panelMut, k, rooms, sessi
 # nice looking solution csv
 # advisor > primary faculty > subject teacher
 # above max penalty = advisor?
+
+# hyperlink to students' paper
