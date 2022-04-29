@@ -180,10 +180,10 @@ def genetic_algorithm(n_iter, n_pop, r_cross, r_talkMut, r_panelMut, k, rooms, s
             if scores[i] > bestScore:
                 talkBest, panelBest, bestScore = talkPop[i], panelPop[i], scores[i]
                 print(f'>{gen}, new best: {round(bestScore, 3)}')
-                # write best solution to file
-                if bestScore > overallBestScore:
-                    overallBestScore = bestScore
-                    out_file(talkBest, panelBest, overallBestScore, rooms, sessions)
+        # write best solution to file
+        if bestScore > overallBestScore:
+            overallBestScore = bestScore
+            out_file(talkBest, panelBest, overallBestScore, rooms, sessions)
         # select parents
         selected = [selection(talkPop, panelPop, scores, k) for _ in range(n_pop)]
         # create the next generation
