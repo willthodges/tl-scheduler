@@ -47,7 +47,7 @@ def fitness(talkSolution, panelSolution, teacherTalkMax):
     for teacher in panelSolution:
         teacherTalks[teacher] += 1
         if teacherTalks[teacher] > teacherTalkMax:
-            score -= 1 # too many talks
+            score -= 2 # too many talks
     panelList = [panelSolution[i:i+3] for i in range(0, len(panelSolution), 3)]
     for panel_i in range(len(panelList)):
         advisor = talkDict[talkSolution[panel_i]][0]
@@ -57,19 +57,19 @@ def fitness(talkSolution, panelSolution, teacherTalkMax):
         for teacher in panelList[panel_i]:
             if teacherTalks[primaryFaculty] <= teacherTalkMax:
                 if teacher == advisor:
-                    score += 2 # advisor in talk
+                    score += 1 # advisor in talk
                 if teacher == primaryFaculty:
-                    score += 1 # primary faculty in talk
+                    score += 2 # primary faculty in talk
             else:
                 # if primary faculty has too many talks, count score for subject teacher instead
                 if teacherSubject[teacher] == subject:
                     if teacher == advisor:
-                        score += 2 # advisor in talk
+                        score += 1 # advisor in talk
                         # if advisor is subject teacher only count one
                         continue
                     # only count one subject teacher
                     if subjectTeacher == False:
-                        score += 0.5 # subject teacher in talk
+                        score += 1.5 # subject teacher in talk
                         subjectTeacher = True
     score = score/(len(talkDict)*3)
     return score
@@ -204,34 +204,22 @@ def genetic_algorithm(n_iter, n_pop, r_cross, r_talkMut, r_panelMut, k, rooms, s
 
 # define the total iterations
 n_iter = 100000
-# define the population size (average solution length * 5)
+# define the population size (talks*10)
 n_pop = 1000
 # crossover rate
 r_cross = 0.9
-# talk mutation rate (1 / solution length)
+# talk mutation rate (1/talks)
 r_talkMut = 1/100
-# panel mutation rate (1 / solution length)
+# panel mutation rate (1/talks*3)
 r_panelMut = 1/300
-# candidates drawn in selection (population size * 0.03)
+# candidates drawn in selection (population size*0.03)
 k = 30
 # number of rooms in a session
 rooms = 5
 # number of sessions
 sessions = math.ceil(len(talkDict)/rooms)
-# target max talks for a teacher (min talks*3 / teachers)
+# target max talks for a teacher
 teacherTalkMax = 15
 
 # perform the genetic algorithm search
 genetic_algorithm(n_iter, n_pop, r_cross, r_talkMut, r_panelMut, k, rooms, sessions, teacherTalkMax)
-
-
-# third teacher unique subject
-# teacher max? switch to subject teacher?
-# if advisor is also subject teacher count it?
-# the lower the teacher max, the lower the score 
-
-# nice looking solution csv
-# advisor > primary faculty > subject teacher
-# above max penalty = advisor?
-
-# hyperlink to students' paper
