@@ -1,319 +1,364 @@
-score,0.9191919191919192
+score,0.07079646017699115
 Session,Room 1,Room 2,Room 3,Room 4,Room 5
-1,"3
-Aimee Zvinakis
-James Roberts
-Calina Ciobanu","49
-Kate Schafer
-Dornel Cerro
-Hannah Karmin","28
-Emily Singer
-Craig Schuetze
-Marisol Perez","61
-Arden Thomas
-Sam Ford
-Lindsey Graham","25
-Justin Kenderes
-Cliff Mason
-John Romano"
-2,"24
-Hannah Karmin
-Dornel Cerro
-Craig Schuetze","15
-Emily Singer
-Aimee Zvinakis
-Calina Ciobanu","50
-Justin Kenderes
-Viviana Palacio
-Kate Schafer","54
-RJ Sakai
-Marisol Perez
-Roy Nyberg","35
-Daniel Yu
-Cliff Mason
-Ben Ede"
-3,"58
-Viviana Palacio
-Roy Nyberg
-Lindsey Graham","26
-Arden Thomas
-Marisol Perez
-Craig Schuetze","4
-Ilan Vaisman
-Aimee Zvinakis
-Sam Ford","80
-Justin Kenderes
-Calina Ciobanu
-Kate Schafer","66
-Daniel Yu
-James Roberts
-RJ Sakai"
-4,"94
-Dornel Cerro
-Cliff Mason
-Sam Ford","72
-Calina Ciobanu
-John Romano
-Ben Ede","85
-Ilan Vaisman
-Lindsey Graham
-Marisol Perez","31
-Roy Nyberg
-Craig Schuetze
-Viviana Palacio","40
-RJ Sakai
-Arden Thomas
-Daniel Yu"
-5,"12
-Viviana Palacio
-Ben Ede
-Dornel Cerro","62
-Sam Ford
-Justin Kenderes
-Hannah Karmin","38
-Craig Schuetze
-Daniel Yu
-Arden Thomas","93
-Roy Nyberg
-Marisol Perez
-Cliff Mason","86
-Lindsey Graham
-Ilan Vaisman
-Emily Singer"
-6,"91
-Arden Thomas
-Hannah Karmin
-Roy Nyberg","32
-Craig Schuetze
-Sam Ford
-Justin Kenderes","43
-Lindsey Graham
-James Roberts
-Daniel Yu","17
-RJ Sakai
-Ilan Vaisman
-Calina Ciobanu","77
-Aimee Zvinakis
-Dornel Cerro
-Kate Schafer"
-7,"7
-Ben Ede
-Arden Thomas
-Lindsey Graham","20
-Ilan Vaisman
-Calina Ciobanu
-Dornel Cerro","63
-John Romano
-Hannah Karmin
-Sam Ford","6
-Aimee Zvinakis
-Kate Schafer
-James Roberts","90
-RJ Sakai
-Emily Singer
-Roy Nyberg"
-8,"84
-Calina Ciobanu
-RJ Sakai
-Lindsey Graham","1
-Aimee Zvinakis
-Emily Singer
-Aimee Zvinakis","99
-Viviana Palacio
-Ilan Vaisman
-Cliff Mason","27
-Marisol Perez
-Craig Schuetze
-Arden Thomas","55
-Justin Kenderes
-Roy Nyberg
-Dornel Cerro"
-9,"69
-Aimee Zvinakis
-Lindsey Graham
-John Romano","60
-Hannah Karmin
-Sam Ford
-RJ Sakai","57
-Emily Singer
-Dornel Cerro
-Roy Nyberg","22
-Cliff Mason
-Daniel Yu
-Viviana Palacio","88
-Ben Ede
-Marisol Perez
-Kate Schafer"
-10,"53
-Ilan Vaisman
-Hannah Karmin
-Marisol Perez","68
-Cliff Mason
-Kate Schafer
-James Roberts","42
-Daniel Yu
-Sam Ford
-RJ Sakai","71
-Viviana Palacio
-John Romano
-Calina Ciobanu","82
-Emily Singer
-Lindsey Graham
-Aimee Zvinakis"
-11,"37
-Daniel Yu
-Craig Schuetze
-Emily Singer","92
-Roy Nyberg
-Hannah Karmin
-Ilan Vaisman","74
-Justin Kenderes
-Ben Ede
-James Roberts","89
-Dornel Cerro
-Kate Schafer
-Marisol Perez","16
-Cliff Mason
-RJ Sakai
-Calina Ciobanu"
-12,"45
-Kate Schafer
-Arden Thomas
-Daniel Yu","52
-Dornel Cerro
-Hannah Karmin
-Marisol Perez","18
-Ilan Vaisman
-Calina Ciobanu
-Ben Ede","21
-Cliff Mason
-Aimee Zvinakis
-Justin Kenderes","73
-Craig Schuetze
-John Romano
-Viviana Palacio"
-13,"78
-Calina Ciobanu
-Kate Schafer
-Emily Singer","9
-Arden Thomas
-James Roberts
-Justin Kenderes","36
-Ilan Vaisman
-Ben Ede
-Daniel Yu","46
-Hannah Karmin
-RJ Sakai
-Craig Schuetze","33
-Marisol Perez
-Sam Ford
-John Romano"
-14,"95
-Sam Ford
-Ben Ede
-Emily Singer","11
-Arden Thomas
-Viviana Palacio
-Roy Nyberg","87
-Daniel Yu
-John Romano
-Marisol Perez","65
-Justin Kenderes
-James Roberts
-Craig Schuetze","48
-Hannah Karmin
-RJ Sakai
-Ilan Vaisman"
-15,"30
-Roy Nyberg
-Craig Schuetze
-Cliff Mason","79
-Lindsey Graham
-Kate Schafer
-Calina Ciobanu","39
-John Romano
-Daniel Yu
-James Roberts","2
-Aimee Zvinakis
-Ben Ede
-Arden Thomas","51
-Viviana Palacio
-Hannah Karmin
-Marisol Perez"
-16,"44
-Kate Schafer
-John Romano
-Daniel Yu","19
-Calina Ciobanu
-Ilan Vaisman
-Emily Singer","97
-Craig Schuetze
-Viviana Palacio
-Justin Kenderes","23
-James Roberts
-Sam Ford
-Cliff Mason","83
-Aimee Zvinakis
-Arden Thomas
-Lindsey Graham"
-17,"5
-Ilan Vaisman
-Marisol Perez
-Aimee Zvinakis","75
-Justin Kenderes
-John Romano
-Sam Ford","64
-Ben Ede
-James Roberts
-Lindsey Graham","41
-Daniel Yu
-Emily Singer
-Dornel Cerro","8
-Arden Thomas
-RJ Sakai
-Cliff Mason"
-18,"34
-Sam Ford
-Ben Ede
-Arden Thomas","29
-RJ Sakai
-Marisol Perez
-Craig Schuetze","67
-Emily Singer
-James Roberts
-Kate Schafer","56
-Roy Nyberg
-Dornel Cerro
-Hannah Karmin","13
-Lindsey Graham
-Calina Ciobanu
-Aimee Zvinakis"
-19,"98
-James Roberts
-Craig Schuetze
-Viviana Palacio","76
-Dornel Cerro
-John Romano
-Justin Kenderes","59
-RJ Sakai
-Hannah Karmin
-Sam Ford","10
-Kate Schafer
-Ilan Vaisman
-Arden Thomas","14
-Aimee Zvinakis
-Calina Ciobanu
-Lindsey Graham"
-20,"81
-Ilan Vaisman
-Lindsey Graham
-Kate Schafer","70
-Ben Ede
-John Romano
-James Roberts","96
-Roy Nyberg
-Cliff Mason
-Sam Ford","47
-Hannah Karmin
-Daniel Yu
-Viviana Palacio"
+Session 1,"Lopez, Aden
+Kate
+Roy
+Lindsey","Kelley, Xavier
+John
+Aimee
+Liz","Haveson, Leah
+Marisol
+Kristi
+Sam","Gibbs, Sanai
+Viviana
+Ilan
+Craig","Dumont, Charlotte
+Arden
+Dornel
+Emily"
+Session 2,"Hu, Paula
+Emily
+Ilan
+Calina","Lee, Kai
+Arden
+Sam
+Craig","Stash, Axel
+RJ
+Mason
+James","Antos, Joe
+Ben
+Rosanna
+Marin","Gamboa, Kiara
+Carlos
+Hannah
+Daniel"
+Session 3,"Thordarson, Odinn
+Daniel
+Liz
+RJ","Chough, Miles
+Marisol
+John
+Craig","Anderson, Jack
+Justin
+Kate
+Lindsey","Sifuentes, Michelle
+Sam
+Rosanna
+Aimee","Yoder, Robby
+Ilan
+Marin
+Hannah"
+Session 4,"KirkDacker, Joaquin
+Roy
+Dornel
+James","Hodges, Emily
+Rosanna
+Marisol
+Mason","Williams, Lila
+Lindsey
+Marin
+Craig","Zavistovski, Chloe
+Hannah
+Emily
+RJ","Trujillo, Adan
+Kristi
+Liz
+Sam"
+Session 5,"Revel, Erika
+RJ
+John
+Justin","Clark, Ari
+Viviana
+Roy
+Aimee","Greene, Alana
+Craig
+Daniel
+Marisol","Rios, Ethan
+Dornel
+Calina
+Arden","Argueta, April
+Marin
+Liz
+Kate"
+Session 6,"Nachmanoff, Bug
+Calina
+Kate
+Mason","Del Toro, Diego
+RJ
+Viviana
+Craig","Besch, Matthias
+Aimee
+Daniel
+Emily","Rossi, Gavin
+Marin
+Kristi
+Hannah","Bjorgum, Magnus
+Marisol
+John
+Carlos"
+Session 7,"Neubert, Penn
+Lindsey
+Calina
+Rosanna","Coronell, Max
+Marin
+Viviana
+Carlos","Wilson, Sofie
+Ben
+Kristi
+Dornel","Regardie, Vivian
+Liz
+John
+Craig","Stern, Asher
+Sam
+Marisol
+Emily"
+Session 8,"Dencik, Connor
+Sam
+Craig
+Liz","Lee, Lauren
+John
+Kristi
+Marisol","Huggins, Beth
+Aimee
+Emily
+Mason","Deverell, John
+Kate
+RJ
+Ilan","Fatheree, AP
+James
+Hannah
+Dornel"
+Session 9,"Lennox, Lucia
+Marisol
+Arden
+John","Bearman, Owen
+Calina
+Roy
+Dornel","Bluestone, Anna
+Craig
+Emily
+Kate","Vallejo, Nicolas
+Sam
+Kristi
+Daniel","Arida, Adrian
+Hannah
+Viviana
+Aimee"
+Session 10,"Hernandez-Solis, Joaquin
+Liz
+Emily
+James","Rosales, America
+Arden
+Sam
+Calina","Crick, Adrian
+RJ
+Marisol
+Craig","Gilvary, Cormac
+Viviana
+Roy
+Kristi","Smith, Sacha
+Rosanna
+Aimee
+Carlos"
+Session 11,"Arbet, Ryanne
+Calina
+Roy
+James","Wilson, Collette
+Hannah
+Ilan
+Justin","Spencer, Uly
+John
+RJ
+Marisol","Hu, Tiffany
+Kristi
+Arden
+Lindsey","Rodriguez, Mateo
+Emily
+Carlos
+Ben"
+Session 12,"James, James
+Ilan
+Dornel
+Ben","Waller, Brooklyn
+Emily
+Justin
+Arden","Posada, Maria Paz
+RJ
+Kate
+Daniel","Stern, Tuesday
+James
+Viviana
+Liz","Forman, Alex
+Lindsey
+Sam
+Rosanna"
+Session 13,"Rabaudi, Max
+Ilan
+Justin
+Mason","Monahan, Tingri
+Dornel
+Marin
+Roy","Chong, Athen
+Marisol
+Lindsey
+Rosanna","Wong, Ethan
+Viviana
+James
+Aimee","Lippsmith, Foster
+Kristi
+Daniel
+Hannah"
+Session 14,"Westphal, Cooper
+Dornel
+Calina
+Sam","Day, Avo
+John
+Hannah
+James","DiMassa, Giuseppe
+Daniel
+Rosanna
+Marisol","Muncy, Wyatt
+Lindsey
+Ben
+Carlos","Thordarson, Elsa
+RJ
+Viviana
+Kate"
+Session 15,"Pompa, Gus
+Roy
+Emily
+Arden","Asberger, Ryan
+Mason
+Daniel
+Dornel","Hoyt, Lewis
+Marisol
+Craig
+Justin","Cano Ruiz, Daisy
+Ben
+Lindsey
+Ilan","Golwala, Oskar
+Carlos
+John
+Marin"
+Session 16,"Kiedman, Jojo
+Sam
+John
+Kate","Orth, Sookie
+Rosanna
+Calina
+Justin","Deighton, Malick
+Marisol
+Mason
+Viviana","Bishop, Mackey
+Ben
+Liz
+Hannah","Mavrantonis, Mo
+Marin
+Carlos
+Aimee"
+Session 17,"Reynoso, Camilo
+Ben
+Liz
+John","Davila, Rubina
+Ilan
+Craig
+Calina","Guzman, Amy
+Mason
+Carlos
+Marin","Bianchieri, Sam
+Justin
+Sam
+RJ","Aviles, Johana
+Marisol
+Arden
+Dornel"
+Session 18,"Yoo, Nathan
+Emily
+Justin
+Ben","Muller, Iliana
+Craig
+Mason
+Daniel","Listiak, Simon
+Arden
+Rosanna
+Aimee","Dark, Oliver
+Marisol
+Carlos
+Sam","Simpson, Greta
+Marin
+Ilan
+Liz"
+Session 19,"Mila Hunziker
+Calina
+James
+Viviana","Freeland, Harry
+Arden
+Kate
+Daniel","Neville, Cameron
+Craig
+Emily
+Marisol","Dreskin, Max
+Carlos
+Dornel
+Roy","Kim Levy, Dahlia
+Mason
+Sam
+Ben"
+Session 20,"Sanders, Nicole
+Liz
+Marisol
+Sam","Luther, Phoenix
+Arden
+Lindsey
+John","Thomas, Derek
+Mason
+Craig
+Marin","Wilson, Harold
+Justin
+James
+Hannah","Thomason, Owen
+Roy
+RJ
+Kristi"
+Session 21,"Rios, Noah
+Ilan
+Lindsey
+Marisol","Balangue, Amy
+Roy
+Emily
+Kristi","Park, Ruby
+Sam
+Justin
+Marin","Adams, Alice
+RJ
+Craig
+Dornel","Schneider, Penn
+James
+Viviana
+Ben"
+Session 22,"Almo-Milkin, Sam
+Roy
+Rosanna
+John","Fleischli, Lana
+Ilan
+Sam
+Marin","Fennell-Molinaro, Sav
+Mason
+Marisol
+Kristi","Meza, Nallely
+James
+Daniel
+Craig","Aguilar, Gloria
+Viviana
+RJ
+Emily"
+Session 23,"Hoffman, Julia
+Kate
+Craig
+Ben","Hu, Arjun
+Calina
+Sam
+Rosanna","Freeman, Hannah
+Dornel
+Lindsey
+Hannah"

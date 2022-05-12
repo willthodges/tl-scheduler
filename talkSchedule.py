@@ -1,21 +1,24 @@
 from numpy.random import randint
 import csv, random, math
 
-teacherSubject = {}
+teacherList = []
 with open('teachers.csv', 'r', newline='') as in_file:
     reader = csv.reader(in_file)
     next(reader)
     for row in reader:
-        (teacher, subject) = row
-        teacherSubject[teacher] = subject
+        row  = ''.join(row).strip()
+        teacherList.append(row)
 
 talkDict = {}
 with open('talks.csv', 'r', newline='') as in_file:
     reader = csv.reader(in_file)
     next(reader)
     for row in reader:
-        (talk, advisor, primaryFaculty, subject) = row
-        talkDict[talk] = (advisor, primaryFaculty, subject)
+        (talk, advisor, primaryFaculty) = row
+        talk = talk.strip()
+        advisor = advisor.strip()
+        primaryFaculty = primaryFaculty.strip()
+        talkDict[talk] = (advisor, primaryFaculty)
 
 def pop_init(n_pop, rooms, sessions):
     talkPop, panelPop = [], []
@@ -29,9 +32,9 @@ def pop_init(n_pop, rooms, sessions):
         for i in range(sessions):
             if i != sessions-1:
                 # sample a random session
-                sessionNew = random.sample((sorted(teacherSubject)), rooms*3)
+                sessionNew = random.sample(teacherList, rooms*3)
             else:
-                sessionNew = random.sample((sorted(teacherSubject)), leftover*3)
+                sessionNew = random.sample(teacherList, leftover*3)
             # append each session to the solution
             panelSolution.extend(sessionNew)
         # append each solution to the population
@@ -42,36 +45,23 @@ def pop_init(n_pop, rooms, sessions):
 def fitness(talkSolution, panelSolution, teacherTalkMax):
     score = 0
     teacherTalks = {}
-    for teacher in sorted(teacherSubject):
+    for teacher in teacherList:
         teacherTalks[teacher] = 0
     for teacher in panelSolution:
         teacherTalks[teacher] += 1
         if teacherTalks[teacher] > teacherTalkMax:
-            score -= 2 # too many talks
+            score -= 1 # too many talks
     panelList = [panelSolution[i:i+3] for i in range(0, len(panelSolution), 3)]
     for panel_i in range(len(panelList)):
         advisor = talkDict[talkSolution[panel_i]][0]
         primaryFaculty = talkDict[talkSolution[panel_i]][1]
-        subject = talkDict[talkSolution[panel_i]][2]
-        subjectTeacher = False
         for teacher in panelList[panel_i]:
             if teacherTalks[primaryFaculty] <= teacherTalkMax:
                 if teacher == advisor:
                     score += 1 # advisor in talk
                 if teacher == primaryFaculty:
-                    score += 2 # primary faculty in talk
-            else:
-                # if primary faculty has too many talks, count score for subject teacher instead
-                if teacherSubject[teacher] == subject:
-                    if teacher == advisor:
-                        score += 1 # advisor in talk
-                        # if advisor is subject teacher only count one
-                        continue
-                    # only count one subject teacher
-                    if subjectTeacher == False:
-                        score += 1.5 # subject teacher in talk
-                        subjectTeacher = True
-    score = score/(len(talkDict)*3)
+                    score += 1 # primary faculty in talk
+    score = score/(len(talkDict)*2)
     return score
 
 def selection(talkPop, panelPop, scores, k):
@@ -112,13 +102,13 @@ def crossover(p1, p2, r_cross, rooms):
         for session_i in range(len(sessionList)):
             for teacher_i in range(len(sessionList[session_i])):
                 if sessionList[session_i].count(sessionList[session_i][teacher_i]) > 1:
-                    avaliable = list(set(sorted(teacherSubject)).symmetric_difference(set(sessionList[session_i])))
+                    avaliable = list(set(teacherList).symmetric_difference(set(sessionList[session_i])))
                     c1[1][session_i*rooms*3 + teacher_i] = random.choice(avaliable)
         sessionList = [c2[1][i:i+rooms*3] for i in range(0, len(c2[1]), rooms*3)]
         for session_i in range(len(sessionList)):
             for teacher_i in range(len(sessionList[session_i])):
                 if sessionList[session_i].count(sessionList[session_i][teacher_i]) > 1:
-                    avaliable = list(set(sorted(teacherSubject)).symmetric_difference(set(sessionList[session_i])))
+                    avaliable = list(set(teacherList).symmetric_difference(set(sessionList[session_i])))
                     c2[1][session_i*rooms*3 + teacher_i] = random.choice(avaliable)
     return [c1, c2]
 
@@ -131,13 +121,13 @@ def mutation(talkSolution, panelSolution, r_talkMut, r_panelMut, rooms):
     # panel mutation
     for panel_i in range(len(panelSolution)):
         if random.random() < r_panelMut:
-            panelSolution[panel_i] = random.choice(sorted(teacherSubject))
+            panelSolution[panel_i] = random.choice(teacherList)
     # swap teachers that appear more than once in a session
     sessionList = [panelSolution[i:i+rooms*3] for i in range(0, len(panelSolution), rooms*3)]
     for session_i in range(len(sessionList)):
         for teacher_i in range(len(sessionList[session_i])):
             if sessionList[session_i].count(sessionList[session_i][teacher_i]) > 1:
-                avaliable = list(set(sorted(teacherSubject)).symmetric_difference(set(sessionList[session_i])))
+                avaliable = list(set(teacherList).symmetric_difference(set(sessionList[session_i])))
                 panelSolution[session_i*rooms*3 + teacher_i] = random.choice(avaliable)
 
 def out_file(talkSolution, panelSolution, score, rooms, sessions):
@@ -151,7 +141,7 @@ def out_file(talkSolution, panelSolution, score, rooms, sessions):
         # headers
         writer.writerow(['Session', 'Room 1', 'Room 2', 'Room 3', 'Room 4', 'Room 5'])
         for i in range(sessions):
-            dataline = [i+1]
+            dataline = ['Session ' + str(i+1)]
             for panel in sessionList[i]:
                 dataline.append('\n'.join(panel))
             writer.writerow(dataline)
@@ -205,21 +195,24 @@ def genetic_algorithm(n_iter, n_pop, r_cross, r_talkMut, r_panelMut, k, rooms, s
 # define the total iterations
 n_iter = 100000
 # define the population size (talks*10)
-n_pop = 1000
+n_pop = len(talkDict)*10
 # crossover rate
 r_cross = 0.9
 # talk mutation rate (1/talks)
-r_talkMut = 1/100
+r_talkMut = 1/len(talkDict)
 # panel mutation rate (1/talks*3)
-r_panelMut = 1/300
+r_panelMut = 1/(len(talkDict)*3)
 # candidates drawn in selection (population size*0.03)
-k = 30
+k = round(len(talkDict)*0.3)
 # number of rooms in a session
 rooms = 5
 # number of sessions
 sessions = math.ceil(len(talkDict)/rooms)
 # target max talks for a teacher
-teacherTalkMax = 15
+teacherTalkMax = 12
 
 # perform the genetic algorithm search
 genetic_algorithm(n_iter, n_pop, r_cross, r_talkMut, r_panelMut, k, rooms, sessions, teacherTalkMax)
+
+#session #
+#first name, last name
