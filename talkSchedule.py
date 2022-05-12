@@ -15,7 +15,8 @@ with open('talks.csv', 'r', newline='') as in_file:
     next(reader)
     for row in reader:
         (talk, advisor, primaryFaculty) = row
-        talk = talk.strip()
+        talk = talk.split(' ')
+        talk = talk[1].strip(', ') + ' ' + talk[0].strip(', ')
         advisor = advisor.strip()
         primaryFaculty = primaryFaculty.strip()
         talkDict[talk] = (advisor, primaryFaculty)
@@ -50,7 +51,7 @@ def fitness(talkSolution, panelSolution, teacherTalkMax):
     for teacher in panelSolution:
         teacherTalks[teacher] += 1
         if teacherTalks[teacher] > teacherTalkMax:
-            score -= 1 # too many talks
+            score -= 0.5 # penalty each time teacher has too many talks
     panelList = [panelSolution[i:i+3] for i in range(0, len(panelSolution), 3)]
     for panel_i in range(len(panelList)):
         advisor = talkDict[talkSolution[panel_i]][0]
@@ -58,10 +59,10 @@ def fitness(talkSolution, panelSolution, teacherTalkMax):
         for teacher in panelList[panel_i]:
             if teacherTalks[primaryFaculty] <= teacherTalkMax:
                 if teacher == advisor:
-                    score += 1 # advisor in talk
+                    score += 1 # reward for advisor in talk
                 if teacher == primaryFaculty:
-                    score += 1 # primary faculty in talk
-    score = score/(len(talkDict)*2)
+                    score += 1 # reward for primary faculty in talk
+    score = score/(len(talkDict)*2) # convert to unit interval where max score is talks*optimal score on a talk
     return score
 
 def selection(talkPop, panelPop, scores, k):
@@ -202,17 +203,14 @@ r_cross = 0.9
 r_talkMut = 1/len(talkDict)
 # panel mutation rate (1/talks*3)
 r_panelMut = 1/(len(talkDict)*3)
-# candidates drawn in selection (population size*0.03)
+# candidates drawn in selection (talks*0.3)
 k = round(len(talkDict)*0.3)
 # number of rooms in a session
 rooms = 5
 # number of sessions
 sessions = math.ceil(len(talkDict)/rooms)
 # target max talks for a teacher
-teacherTalkMax = 12
+teacherTalkMax = 11 
 
 # perform the genetic algorithm search
 genetic_algorithm(n_iter, n_pop, r_cross, r_talkMut, r_panelMut, k, rooms, sessions, teacherTalkMax)
-
-#session #
-#first name, last name
