@@ -1,365 +1,343 @@
-Score:,0.15,"Primary Faculty
-Score:",0.292
-,Room 1,Room 2,Room 3,Room 4,Room 5
-Session 1,"Aden Lopez
-Justin
-RJ
-Roy","Sanai Gibbs
-Marisol
-Carlos
-James","Lauren Lee
-Dornel
-Emily
-Aimee","Johana Aviles
-Rosanna
-Kristi
-Mason","Matthias Besch
-Viviana
-John
-Ben"
-Session 2,"Magnus Bjorgum
-Dornel
-Marin
-Hannah","Nicole Sanders
-Daniel
-John
-Ilan","Harry Freeland
-Rosanna
-Justin
-Aimee","Tuesday Stern
-Carlos
-Liz
-Craig","Odinn Thordarson
-Kristi
-Roy
-Sam"
-Session 3,"Sacha Smith
-Justin
-Craig
-Liz","Ari Clark
-James
+Score:,0.909,"Primary Faculty
+Score:",0.963
+,Room 1,Room 2,Room 3,Room 4,Room 5,Room 6,Room 7
+Session 1,"Gwendolyn Schneider
+Sean
 Kate
-Carlos","Jojo Kiedman
-Kristi
-Daniel
-Mason","Connor Dencik
-Ben
-RJ
-Dornel","Lila Williams
-Roy
-Rosanna
-Sam"
-Session 4,"Derek Thomas
-Craig
+Grayson","Mason Cocker
+Greg
+Joel
+Nyuol","Sabane Campbell
+Bradley
 Arden
-Ben","Gloria Aguilar
-Mason
-Liz
-Marin","Alex Forman
-Sam
-Carlos
-Viviana","America Rosales
-Lindsey
+Liz","Jack Tibbitt
+Craig
+RJ
+Aimee","Haydn Schlinger
+Ben
+Nicole
+Viviana","Amelie Barajas
+James
 Daniel
-John","Ethan Wong
+Calina","Arlen Barber
+Juana
+Jesse
+Eric"
+Session 2,"Terra Lewis
+Juana
+Aimee
+Ben","Astrid Conder
+Greg
+Viviana
+Ian","Yoshi Peretti
+Leigh
+Calina
+James","Truman George
+Alexi
+Daniel
+Arden","Sam Fish
+Laura
+Nyuol
+Emily","Kieran Fennell-Molinaro
+Craig
+Eric
+Liz","Zoe Sanchez
+Nicole
+Jesse
+Bradley"
+Session 3,"Finn Webster
+Bradley
+Nicole
+Calina","Violet Kalbeitzer
+James
+Eric
+Juana","Alex Feldman
+Laura
+Ian
+Abraham","Alexander Merriam
+Leigh
+Sean
+Craig","Hart Lippsmith
+Grayson
+Daniel
+Joel","Quin Lizama
+Jesse
+Nyuol
+Emily","Sawyer Lunn
 Kate
-Emily
-Rosanna"
-Session 5,"Julia Hoffman
-Kristi
-Rosanna
-Lindsey","Vivian Regardie
-Carlos
-Roy
-Arden","James James
-Liz
-Mason
-Emily","Sam Bianchieri
-Aimee
-RJ
-Ben","Ethan Rios
-Craig
-Calina
-Marisol"
-Session 6,"Max Rabaudi
-Craig
-Marin
-Viviana","Lana Fleischli
-Roy
-John
-Mason","Uly Spencer
-Ben
-Marisol
-Aimee","Lucia Lennox
-Justin
-Rosanna
-Arden","Chloe Zavistovski
-Emily
-Carlos
-RJ"
-Session 7,"Oliver Dark
-Viviana
-Hannah
-Rosanna","Bug Nachmanoff
-Liz
-Mason
-Marisol","April Argueta
-Arden
-Calina
-Aimee","Hunziker Mila
-Emily
-James
-Kristi","Gavin Rossi
-RJ
-Roy
-Sam"
-Session 8,"Paula Hu
-Daniel
-Rosanna
-Hannah","Amy Guzman
-Marisol
-Sam
-John","Brooklyn Waller
-Roy
-Ilan
-Dornel","Sofie Wilson
-Calina
-Liz
-Kate","Adan Trujillo
-James
-Kristi
-Aimee"
-Session 9,"Joaquin Hernandez-Solis
-Mason
-Sam
-Ben","Miles Chough
-Viviana
-Roy
-Rosanna","Leah Haveson
-Marin
-Craig
-Lindsey","Nicolas Vallejo
-Aimee
-Dornel
-Marisol","Foster Lippsmith
-John
-Arden
-Ilan"
-Session 10,"Giuseppe DiMassa
-Lindsey
-Ben
-Daniel","Joaquin KirkDacker
-Carlos
-RJ
-John","Lewis Hoyt
-Craig
-Aimee
-Liz","Ruby Park
-Kate
-Sam
-James","Gus Pompa
-Rosanna
-Marisol
-Roy"
-Session 11,"Mateo Rodriguez
-Lindsey
-Hannah
-Ilan","Robby Yoder
-RJ
-Justin
-Dornel","Iliana Muller
-Marin
-Calina
-Rosanna","Malick Deighton
-Marisol
-Kristi
-Mason","Wyatt Muncy
-Craig
-John
-Liz"
-Session 12,"Sam Almo-Milkin
-Daniel
-Hannah
-Dornel","Maria Posada
-Emily
-Rosanna
-Sam","Kiara Gamboa
-John
-Marin
-Ben","Cormac Gilvary
-RJ
-James
-Justin","Axel Stash
-Lindsey
-Carlos
-Kate"
-Session 13,"Arjun Hu
-Marin
-Aimee
-Sam","Adrian Crick
-Carlos
-Emily
-RJ","Max Dreskin
-Kristi
-John
-Kate","Nallely Meza
-Roy
-Rosanna
-Liz","Hannah Freeman
-Hannah
-Mason
-Justin"
-Session 14,"Sookie Orth
-Craig
-RJ
-Liz","Noah Rios
-James
-Carlos
-Calina","Cameron Neville
-Aimee
-Sam
-Ben","Charlotte Dumont
-Arden
-Dornel
-Emily","Penn Schneider
-Ilan
-Marin
-Mason"
-Session 15,"Mackey Bishop
-Liz
-Kristi
-Lindsey","Ruiz, Cano
-Carlos
-Aimee
-Calina","Michelle Sifuentes
-RJ
-James
-Sam","Max Coronell
-Viviana
-Dornel
-Craig","Athen Chong
-Mason
-Roy
-Justin"
-Session 16,"Mo Mavrantonis
-Kate
-Aimee
-Dornel","Owen Bearman
-Roy
-Arden
-Viviana","AP Fatheree
-Calina
-Craig
-Ilan","Harold Wilson
-Daniel
-Emily
-Ben","Erika Revel
-Justin
-Sam
-John"
-Session 17,"Ryanne Arbet
-Sam
-Dornel
-Rosanna","Elsa Thordarson
-Calina
-Justin
-RJ","Xavier Kelley
-Marin
-Carlos
-Aimee","Alana Greene
-Emily
-Marisol
-Arden","Kai Lee
-Mason
-Viviana
-Hannah"
-Session 18,"Amy Balangue
-Daniel
-Rosanna
-Calina","Joe Antos
-Sam
-John
-Ilan","Ryan Asberger
-Mason
-Lindsey
-Kate","Oskar Golwala
-Craig
-Roy
-Emily","Alice Adams
-Kristi
-Aimee
-Marin"
-Session 19,"Owen Thomason
-Ben
-Sam
-Kristi","Emily Hodges
-James
-Marin
-Daniel","John Deverell
-Justin
-Mason
-Marisol","Asher Stern
-Aimee
-Hannah
-Craig","Avo Day
-Emily
 RJ
 Arden"
-Session 20,"Camilo Reynoso
-Marin
-John
-Hannah","Collette Wilson
-Kate
-Ilan
-Kristi","Phoenix Luther
-Rosanna
-Daniel
-Dornel","Beth Huggins
-Roy
-Ben
-Arden","Tiffany Hu
-Emily
-RJ
-Lindsey"
-Session 21,"Levy, Kim
-Carlos
-Dornel
-James","Anna Bluestone
-Ben
-Marin
-Aimee","Rubina Davila
-Emily
-Marisol
-John","Cooper Westphal
-Hannah
-Calina
-Viviana","Tingri Monahan
-Sam
-Ilan
-Mason"
-Session 22,"Penn Neubert
-Ben
+Session 4,"Veronica Black
+James
 Arden
-Mason","Simon Listiak
+Emily","Vivi Kopcho
+Nicole
+Laura
+Leigh","James Wagner
+Juana
+Grayson
+Bradley","Morris Goldman
+Viviana
 Calina
-Kristi
-James","Adrian Arida
+Abraham","Oliver Janss
+Liz
+RJ
+Ian","Lorelei Curren-Evans
+Craig
+Jesse
+Greg","Cocker Mason
+Eric
 Kate
-Ilan
-Lindsey","Jack Anderson
-Viviana
-John
-Hannah","Toro, Del
-Dornel
-Justin
-Aimee"
-Session 23,"Sav Fennell-Molinaro
-John
-Mason
-Emily","Nathan Yoo
-Viviana
-Marisol
-Kristi","Greta Simpson
+Nyuol"
+Session 5,"Quinn O'Malley
+Calina
+Eric
+James","Xabi Wallens
+Grayson
+Grayson
+Leigh","Dahlia Gutierrez
+Emily
+Sean
+Ben","Gabriela Posada
+Craig
+Liz
+Viviana","Orion Thomas
+Bradley
+Juana
+Daniel","Natalie Wray
+Arden
+Ian
+Jesse","Waller Hazel
+Nicole
+Alexi
+Nyuol"
+Session 6,"Ila Rae Brookshire
 Daniel
-Lindsey
-Kate"
+Grayson
+Calina","Laszlo Stein
+Juana
+Leigh
+Bradley","Everest Donovan
+Eric
+Nicole
+Nyuol","Lockett Pentz
+Liz
+Sean
+Joel","Tony Wang
+Arden
+Viviana
+James","Mateo Martinez
+Emily
+Jesse
+Greg","Gibson Buffa
+Kate
+Laura
+Ian"
+Session 7,"Irene Xue
+Daniel
+Laura
+Bradley","Emit Thomson-Tribe
+Viviana
+Nicole
+Leigh","Willow Beuoy
+Nyuol
+Abraham
+Alexi","Sam Heiser
+Juana
+Eric
+Aimee","Ethan Wang
+Jesse
+Ian
+Liz","Mardi Shearer
+Grayson
+Craig
+Arden","Henry Holcomb
+Emily
+Sean
+Ben"
+Session 8,"Ben Cox
+Aimee
+Viviana
+Abraham","Royce Clement
+Leigh
+Craig
+Eric","Isla Thomlinson
+Ben
+Juana
+Arden","Luca Lombardi
+Ian
+Joel
+Daniel","Luca Barguiarena
+Laura
+Jesse
+Kate","Nico Felch
+Emily
+Grayson
+Nyuol","Pluto Gunsberg
+James
+Calina
+Liz"
+Session 9,"Mekaela Fuqua
+Ian
+RJ
+Bradley","Rachel Youngstrom
+Grayson
+Abraham
+Greg","Shepard Williams
+Emily
+Leigh
+Ben","Mimi Duplass
+Eric
+Calina
+James","Bruno Gutierrez
+Sean
+Joel
+Daniel","Finn Gorter
+Craig
+Liz
+Jesse","Angelina Rodriguez
+Alexi
+Juana
+Nicole"
+Session 10,"Owen Hawxhurst
+Greg
+Ian
+James","Keziah Mbugua
+Sean
+Laura
+Nyuol","Nate Dumont
+Calina
+Daniel
+Alexi","Gideon Schneider
+Eric
+Grayson
+Aimee","Hazel Waller
+Kate
+Joel
+Nicole","Mason Shapiro
+Viviana
+Bradley
+Craig","Violet Robinson
+Juana
+RJ
+Ben"
+Session 11,"Eurus Wang
+Joel
+Daniel
+Emily","Ainsley Murray
+Greg
+RJ
+Aimee","Andrew Fyke
+Kate
+Ben
+Grayson","Bones Clement
+Alexi
+Sean
+Jesse","Jackson Huggins
+Laura
+Eric
+Bradley","Donovan Everest
+Liz
+Nicole
+Nyuol","Vivian Williams
+Calina
+Abraham
+Viviana"
+Session 12,"Max Marcus
+Laura
+Eric
+Nicole","Oli Dauberman
+Craig
+James
+Aimee","Loella Kleiner
+Kate
+Arden
+Calina","Izzy Salinger Ambriz
+RJ
+Nyuol
+Sean","Brandon Marquez
+Juana
+Bradley
+Abraham","Isha Agrawal
+Leigh
+Daniel
+Ian","Zowen Ajemian
+Joel
+Alexi
+Emily"
+Session 13,"Alexander Fyke
+Craig
+Grayson
+Liz","Wade Booker-Goff
+Leigh
+Nicole
+Nyuol","Piper Svihovec
+Greg
+Emily
+Ben","Edie Coye
+Jesse
+Ian
+Kate","Noah Datum
+Alexi
+Joel
+Juana","Clement Bones
+Bradley
+RJ
+Sean","Quinn Calof
+Viviana
+Abraham
+Daniel"
+Session 14,"Arty Peretti
+Leigh
+Laura
+Juana","Luca DiMassa
+Sean
+Calina
+Jesse","Neva Young
+Daniel
+Viviana
+Joel","Ellis Kopcho
+Bradley
+RJ
+Emily","Laidy Silverman
+Liz
+Ben
+Ian","Wren Davies-Dickson
+Craig
+Alexi
+James","Connie Zhao
+Eric
+Abraham
+Grayson"
+Session 15,"Anders Wilson
+Nyuol
+Sean
+Liz","Liam Norton
+RJ
+Ian
+Bradley","Zola Wills
+Kate
+Emily
+Craig","Elena Villanueva
+Leigh
+Nicole
+Aimee","Millie Haberman
+Arden
+Jesse
+Daniel","Eva Famosa-Enemoh
+Juana
+Alexi
+Greg","June Baehler
+Calina
+James
+Abraham"
+Session 16,"Lindsay Gott
+Greg
+Nyuol
+Sean","Jena Grzelinska
+Craig
+Leigh
+Nicole","Alex Waller
+Jesse
+Arden
+Calina"

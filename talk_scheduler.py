@@ -17,8 +17,8 @@ with open('talks.csv', 'r', newline='') as in_file:
     next(reader)
     for row in reader:
         talk, advisor, primary_faculty = row
-        talk = talk.strip().split(' ')
-        talk = talk[1] + ' ' + talk[0].strip(',')
+        talk = talk.strip().split(',')
+        talk = talk[1].strip() + ' ' + talk[0].strip()
         advisor = advisor.strip()
         primary_faculty = primary_faculty.strip()
         talk_dict[talk] = (advisor, primary_faculty)
@@ -63,17 +63,17 @@ def fitness(talk_solution, panel_solution, TEACHER_TALK_MAX, TEACHER_TALK_MAX_PE
         advisor = talk_dict[talk_solution[panel_i]][0]
         primary_faculty = talk_dict[talk_solution[panel_i]][1]
         for teacher in panel_list[panel_i]:
-            if teacher_talks_dict[primary_faculty] <= TEACHER_TALK_MAX:
-                if teacher == advisor:
-                    # reward for advisor in talk
-                    score += ADVISOR_REWARD
-                if teacher == primary_faculty:
-                    # reward for primary faculty in talk
-                    score += PRIMARY_FACULTY_REWARD
-                    primary_faculty_score += 1
+            # if teacher_talks_dict[primary_faculty] <= TEACHER_TALK_MAX:
+            if teacher == advisor:
+                # reward for advisor in talk
+                score += ADVISOR_REWARD
+            if teacher == primary_faculty:
+                # reward for primary faculty in talk
+                score += PRIMARY_FACULTY_REWARD
+                primary_faculty_score += 1
     # convert score to unit interval where max score is when every talk has its advisor and primary faculty
-    score = score/(len(talk_dict) * (ADVISOR_REWARD + PRIMARY_FACULTY_REWARD))
-    primary_faculty_score = primary_faculty_score/len(talk_dict)
+    score = score / (len(talk_dict) * (ADVISOR_REWARD + PRIMARY_FACULTY_REWARD))
+    primary_faculty_score = primary_faculty_score / len(talk_dict)
     return score, primary_faculty_score
 
 def selection(talk_pop, panel_pop, scores_list, N_SELECTION):
@@ -111,13 +111,13 @@ def crossover(p1, p2, R_CROSS, N_ROOMS):
         # c1[1] = p1[1][:pt*3] + p2[1][pt*3:]
         # c2[1] = p2[1][:pt*3] + p1[1][pt*3:]
         # swap teachers that appear more than once in a session
-        session_list = [c1[1][i:i + N_ROOMS*3] for i in range(0, len(c1[1]), N_ROOMS*3)]
+        session_list = [c1[1][i:i+N_ROOMS*3] for i in range(0, len(c1[1]), N_ROOMS*3)]
         for session_i in range(len(session_list)):
             for teacher_i in range(len(session_list[session_i])):
                 if session_list[session_i].count(session_list[session_i][teacher_i]) > 1:
                     avaliable = list(set(teacher_list).symmetric_difference(set(session_list[session_i])))
                     c1[1][session_i * N_ROOMS*3 + teacher_i] = random.choice(avaliable)
-        session_list = [c2[1][i:i + N_ROOMS*3] for i in range(0, len(c2[1]), N_ROOMS*3)]
+        session_list = [c2[1][i:i+N_ROOMS*3] for i in range(0, len(c2[1]), N_ROOMS*3)]
         for session_i in range(len(session_list)):
             for teacher_i in range(len(session_list[session_i])):
                 if session_list[session_i].count(session_list[session_i][teacher_i]) > 1:
@@ -137,7 +137,7 @@ def mutation(talk_solution, panel_solution, R_TALKMUT, R_PANELMUT, N_ROOMS):
         if random.random() < R_PANELMUT:
             panel_solution[panel_i] = random.choice(teacher_list)
     # swap teachers that appear more than once in a session
-    session_list = [panel_solution[i:i + N_ROOMS*3] for i in range(0, len(panel_solution), N_ROOMS*3)]
+    session_list = [panel_solution[i:i+N_ROOMS*3] for i in range(0, len(panel_solution), N_ROOMS*3)]
     for session_i in range(len(session_list)):
         for teacher_i in range(len(session_list[session_i])):
             if session_list[session_i].count(session_list[session_i][teacher_i]) > 1:
@@ -150,7 +150,7 @@ def out_file(talk_solution, panel_solution, score, primary_faculty_score, N_ROOM
         panel_list = [panel_solution[i:i+3] for i in range(0, len(panel_solution), 3)]
         for i in range(len(panel_list)):
             panel_list[i].insert(0, talk_solution[i])
-        session_list = [panel_list[i:i + N_ROOMS] for i in range(0, len(panel_list), N_ROOMS)]
+        session_list = [panel_list[i:i+N_ROOMS] for i in range(0, len(panel_list), N_ROOMS)]
         writer = csv.writer(out_file)
         writer.writerow(['Score:', round(score, 3), 'Primary Faculty\nScore:', round(primary_faculty_score, 3)])
         # headers
@@ -180,6 +180,8 @@ def genetic_algorithm(N_POP, R_CROSS, R_TALKMUT, R_PANELMUT, N_SELECTION, N_ROOM
     gen = 0
     while True:
         gen += 1
+        if gen % 1000 == 0:
+            print(f'>{gen}')
         # evaluate all candidates in the population
         scores_list = [fitness(talk_solution, panel_solution, TEACHER_TALK_MAX, TEACHER_TALK_MAX_PENALTY, ADVISOR_REWARD, PRIMARY_FACULTY_REWARD) for talk_solution, panel_solution in zip(talk_pop, panel_pop)]
         # check for new best solution
@@ -187,8 +189,6 @@ def genetic_algorithm(N_POP, R_CROSS, R_TALKMUT, R_PANELMUT, N_SELECTION, N_ROOM
             if scores_list[i][0] > best_score:
                 talk_best, panel_best, best_score, best_primary_faculty_score = talk_pop[i], panel_pop[i], scores_list[i][0], scores_list[i][1]
                 print(f'>{gen}, score: {round(best_score, 3)}, PF score: {round(best_primary_faculty_score, 3)}')
-            elif gen % 1000 == 0:
-                print(f'>{gen}')
         # write best solution to file
         if best_score > overall_best_score:
             overall_best_score = best_score
@@ -221,17 +221,29 @@ R_PANELMUT = 1/(len(talk_dict)*3)
 # number of candidates drawn in selection (number of talks*0.3)
 N_SELECTION = round(len(talk_dict)*0.3)
 # number of rooms in a session
-N_ROOMS = 5
+N_ROOMS = 7
 # number of sessions
 N_SESSIONS = math.ceil(len(talk_dict)/N_ROOMS)
 # target max talks for a teacher
-TEACHER_TALK_MAX = 11
+TEACHER_TALK_MAX = 14
 # score penalty for going over target max talks
 TEACHER_TALK_MAX_PENALTY = -1
 # score reward for a talk having its advisor
 ADVISOR_REWARD = 1
 # score reward for a talk having its primary faculty
-PRIMARY_FACULTY_REWARD = 3
+PRIMARY_FACULTY_REWARD = 1.25
+
+print(f'Population Size: {N_POP}')
+print(f'Crossover Rate: {R_CROSS}')
+print(f'Talk Mutation Rate: {round(R_TALKMUT, 5)}')
+print(f'Panel Mutation Rate: {round(R_PANELMUT, 5)}')
+print(f'Number of Candidates Drawn in Selection: {N_SELECTION}')
+print('')
 
 # perform the genetic algorithm search
 genetic_algorithm(N_POP, R_CROSS, R_TALKMUT, R_PANELMUT, N_SELECTION, N_ROOMS, N_SESSIONS, TEACHER_TALK_MAX, TEACHER_TALK_MAX_PENALTY, ADVISOR_REWARD, PRIMARY_FACULTY_REWARD)
+
+# fix extra primary faculty bug: initial condition replacement? check how random select works
+# maximum number of talks is number of talks*3/number of teachers? adding extra improves score
+# add way to calculate max talks
+# talk title on top, then student name, then primary faculty underneath then rest of panel underneath
